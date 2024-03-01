@@ -53,7 +53,7 @@ for x in range(rows):
                 found_adjacent = True
         else:
             if found_adjacent:
-                print(f"from line {x+1} adding {current_number}")
+                #print(f"from line {x+1} adding {current_number}")
                 gatered_numbers.append(int(current_number))
             #if len(current_number)>0:
                 #print(current_number)
