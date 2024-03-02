@@ -37,3 +37,4 @@ for i, card in enumerate(data):
 
 
 print(sum(m.values()))
+##
