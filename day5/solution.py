@@ -1,10 +1,10 @@
 import re
 
-with open("input2.txt", "r") as file:
+with open("input.txt", "r") as file:
     data = file.read().split("\n")
 
 
-seeds = data[0].split()[1:]
+seeds = list(map(int,data[0].split()[1:]))
 
 def preprocess_data(data): # for sure we can preprocess data better
     
@@ -22,32 +22,36 @@ def preprocess_data(data): # for sure we can preprocess data better
     return preprocessed_data
 
 
+def mapper(map_part, seed=seeds[0]):
+
+    found = seed
+    for line in map_part:
+
+        if seed>=line[1] and seed<(line[1]+line[2]):
+            found = line[0]+(seed-line[1])
+
+    return found        
+
+
 preprocessed_data = preprocess_data(data)
 
+def process_seeds(seeds):
 
-def mapper(map_part):
-    destination = []
-    source = []
+    new_seeds = [i for i in range(seeds[0],seeds[0]+seeds[1])]
+    new_seeds_too = [i for i in range(seeds[2],seeds[2]+seeds[3])]
+    new_seeds = new_seeds + new_seeds_too
 
-    for line in map_part:
-        # print(f"zajmuje sie ta linia {line}") PO CO GENERUJESZ TO WSZYSTKO !!!!!!?!?!?!?!?!?!?
-        dest_range = [i for i in range(line[0], line[0]+line[2])]
-        source_range = [i for i in range(line[1], line[1]+line[2])]
+    return new_seeds
 
-        destination.append(dest_range)
-        source.append(source_range)
 
+processed_seeds = process_seeds(seeds)
+processed_list = []
+for i,seed in enumerate(processed_seeds):
+    current = processed_seeds[i]
+    for block in preprocessed_data:
+        current = mapper(block, current)
+    processed_list.append(current)
     
-    return destination, source
 
 
-     
-
-# for map in preprocessed_data:
-#     print(map)
-#     print("\n")
-
-
-destination, source = mapper(preprocessed_data[0])
-print(destination)
-print(source)
+print(min(processed_list))
