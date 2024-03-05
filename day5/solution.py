@@ -29,29 +29,36 @@ def mapper(map_part, seed=seeds[0]):
 
         if seed>=line[1] and seed<(line[1]+line[2]):
             found = line[0]+(seed-line[1])
+            return found # do not look further after finding
 
     return found        
 
 
 preprocessed_data = preprocess_data(data)
 
-def process_seeds(seeds):
+def process_seeds(seeds): # again the same mistake --> DO NOT STORE SO MANY NUMBERS IN MEMORY
 
-    new_seeds = [i for i in range(seeds[0],seeds[0]+seeds[1])]
-    new_seeds_too = [i for i in range(seeds[2],seeds[2]+seeds[3])]
-    new_seeds = new_seeds + new_seeds_too
-
+    new_seeds = [(seeds[0],seeds[0]+seeds[1]), (seeds[2],seeds[2]+seeds[3])]
     return new_seeds
 
 
 processed_seeds = process_seeds(seeds)
-processed_list = []
-for i,seed in enumerate(processed_seeds):
-    current = processed_seeds[i]
-    for block in preprocessed_data:
-        current = mapper(block, current)
-    processed_list.append(current)
-    
+# processed_list = []
+# for i,seed in enumerate(processed_seeds):
+#     current = processed_seeds[i]
+#     for block in preprocessed_data:
+#         current = mapper(block, current)
+#     processed_list.append(current)
+
+current_min = 999999999999
+for element in processed_seeds:
+    for i in range(element[0],element[1]):
+        current = i
+        for block in preprocessed_data:
+            current = mapper(block, current)
+        if current < current_min:
+            current_min = current
 
 
-print(min(processed_list))
+print(current_min)
+
