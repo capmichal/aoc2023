@@ -30,11 +30,6 @@ def categorize_hand(hand):
     sorted_hand_counter = dict(sorted(hand_counter.items(), 
                                       key=lambda item: (item[1], [order_character.index(char) for char in item[0]]), reverse=True))
     
-    # # instead of creating new hand, just add to value count BAD APPROACH
-    # if "J" in hand:
-    #     most_commmon_character = list(sorted_hand_counter.keys())[0]
-    #     n = hand.count("J")
-    #     sorted_hand_counter[most_commmon_character] += n
 
     # switching wild cards to most common character
     if "J" in hand:
