@@ -80,7 +80,7 @@ for hand in hands:
 order = ["five_of_kind", "four_of_kind", "full_house", "three_of_kind", 
          "two_pair", "one_pair", "high_card"]
 
-# ????????????????????????
+# sorting for EACH character in given string
 sorted_hand_types = dict(sorted(hand_types.items(), 
                                 key=lambda item: (order.index(item[1]), [order_character.index(char) for char in item[0]])))
 
