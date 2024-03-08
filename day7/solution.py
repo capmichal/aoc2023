@@ -13,15 +13,13 @@ for element in data:
     hands.append(element[0])
     bids.append(int(element[1]))
 
-# print(hands)
-# print(bids)
+
 
 order_character = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"]
 hand_types = {}
 
 def categorize_hand(hand):
 
-    # # # # #  
     # counting original characters in hand
     hand_counter = {}
     for symbol in hand:
