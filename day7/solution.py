@@ -21,7 +21,7 @@ hand_types = {}
 
 def categorize_hand(hand):
 
-    #
+    # # # # #  
     # counting original characters in hand
     hand_counter = {}
     for symbol in hand:
