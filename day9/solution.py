@@ -27,7 +27,7 @@ for line in data:
     
     final = []
     for element in stack:
-        final.append(element[-1])
+        final.append(element[0])
 
     result.append(final)
 
@@ -39,9 +39,14 @@ wynik = 0
 #         new_block.append(block[i]+new_block[i-1])
 #     print(new_block)
 
+
 for block in result:
-    wynik += sum(block)
+    block = list(reversed(block))
+    product = 0
+
+    for i in range(len(block)):
+        product = block[i]-product
+
+    wynik += product
 
 print(wynik)
-
-
