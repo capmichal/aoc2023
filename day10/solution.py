@@ -43,6 +43,7 @@ def get_possible(x, y):
             possible_moves.append(move)
     return possible_moves
 
+#TRZEBA SIE UPEWNIC, CZY "MOJA BUDOWA" POZWALA NA PRZEJSCIE DO INNEGO PIPE
 
 
 current_position = (start_x, start_y)
