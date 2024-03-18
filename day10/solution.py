@@ -1,6 +1,6 @@
 import re
 
-with open("input.txt", "r") as file:
+with open("input2.txt", "r") as file:
     data = file.read().split("\n")
 
 # how to properly find an index of starting position "S", re.search / re.finditer
@@ -12,7 +12,7 @@ for i, line in enumerate(data):
         print(start_x, start_y)
 
 start_position = (start_x, start_y)
-
+print(f"starting position {start_position}")
 
 
 
@@ -31,10 +31,10 @@ def get_open(x, y):
         return [(x, y-1), (x+1, y)]
     elif character == "F":
         return [(x+1, y), (x, y+1)]
-    elif character == "S":
-        return "back"
     elif character == ".":
         return []
+    else:
+        return [(x+1, y), (x, y+1), (x, y-1), (x-1, y)]
 
 def get_possible(x, y):
     possible_moves = []
@@ -43,7 +43,6 @@ def get_possible(x, y):
             possible_moves.append(move)
     return possible_moves
 
-#TRZEBA SIE UPEWNIC, CZY "MOJA BUDOWA" POZWALA NA PRZEJSCIE DO INNEGO PIPE
 
 
 current_position = (start_x, start_y)
@@ -52,8 +51,9 @@ previous_path = []
 while True:
 
     possible_moves = get_possible(current_position[0], current_position[1])
-    print(f"possible moves {possible_moves}")
+    #print(f"possible moves {possible_moves}")
     if (start_position in possible_moves) and (start_position != previous_path[-1]):
+        print(f"final position: {current_position}")
         print("mamy to")
         break
 
@@ -61,19 +61,20 @@ while True:
     for possible_move in possible_moves:
         if possible_move not in previous_path:
             can_go = get_open(possible_move[0], possible_move[1])
-            if current_position in can_go:
-                print(f"ide do tej pozycji {possible_move}")
+            my_connections = get_open(current_position[0], current_position[1])
+            #print(f"can go : {can_go}")
+            #print(f"my connections : {my_connections}")
+            if (current_position in can_go) and (possible_move in my_connections):
+                #print(f"ide do tej pozycji {possible_move}")
                 num_steps += 1
                 previous_path.append(current_position)
                 #print(f"sciezka ostatnich {previous_path}")
                 current_position = possible_move
                 break
             else:
-                print(f"aktualnie jestem {current_position}")
-                print("nie wpuszcza mnie")
-        else:
-            print("bylem")
-
+                #print(f"aktualnie jestem {current_position}")
+                #print("nie wpuszcza mnie")
+                pass
 
 print((num_steps+1)//2)
 
